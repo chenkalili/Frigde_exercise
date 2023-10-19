@@ -10,47 +10,47 @@ namespace Refrigerator_exercise
     {
         private static int lastItemID = 0;
 
-        public int ItemID { get; }
-        public string ProductName { get; set; }
-        public int ItemShelf { get; set; }
-        public ItemType Type { get; set; }
-        public KosherType Kosher { get; set; }
-        public DateTime ExpiryDate { get; set; }
-        public double LengthItem { get; set; }
+        public int _itemID { get; }
+        public string _productName { get; set; }
+        public int _itemShelf { get; set; }
+        public ItemType _type { get; set; }
+        public KosherType _kosher { get; set; }
+        public DateTime _expiryDate { get; set; }
+        public double _lengthItem { get; set; }
 
         public Item(string productName, int itemShelf, ItemType type, KosherType kosher, DateTime expiryDate, double lengthItem)
         {
-            ItemID = ++lastItemID; ;
-            ProductName = productName;
-            ItemShelf = itemShelf;
-            Type = type;
-            Kosher = kosher;
-            ExpiryDate = expiryDate;
-            LengthItem = lengthItem;
+            _itemID = ++lastItemID; ;
+            _productName = productName;
+            _itemShelf = itemShelf;
+            _type = type;
+            _kosher = kosher;
+            _expiryDate = expiryDate;
+            _lengthItem = lengthItem;
         }
         public override string ToString()
         {
-            return $"ItemID: {ItemID}\n" +
-                   $"ProductName: {ProductName}\n" +
-                   $"ItemShelf: {ItemShelf}\n" +
-                   $"Type: {Type}\n"+
-                   $"Kosher: {Kosher}\n" +
-                   $"ExpiryDate: {ExpiryDate}\n" +
-                   $"LengthItem: {LengthItem}\n";
+            return $"ItemID: {_itemID}\n" +
+                   $"ProductName: {_productName}\n" +
+                   $"ItemShelf: {_itemShelf}\n" +
+                   $"Type: {_type}\n"+
+                   $"Kosher: {_kosher}\n" +
+                   $"ExpiryDate: {_expiryDate}\n" +
+                   $"LengthItem: {_lengthItem}\n";
         }
     }
 
     public enum ItemType
     {
-        Food,
-        Drink
+        _food,
+        _drink
     }
 
     public enum KosherType
     {
-        Meat,
-        Dairy,
-        Pareve
+        _meat,
+        _dairy,
+        _pareve
     }
 
 }

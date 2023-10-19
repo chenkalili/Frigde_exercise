@@ -11,16 +11,20 @@ namespace Refrigerator_exercise
         private static int lastShelfID = 0, lastFloor=0;
         public int _shelfID { get; }
         public int _floorNumber { get; set; }
-        public double _emptySpaceOnShelf { get; set; }
-        public List<Item> Items { get; set; }
+        public double _spaceOnShelf { get; set; }
+        public List<Item> _items { get; set; }
 
-        public Shelf(double spaceInSquareMeters)
+        public Shelf(double emptySpace)
         {
             _shelfID = ++lastShelfID;
             _floorNumber = ++lastFloor;
-            _emptySpaceOnShelf = spaceInSquareMeters;
-            Items = new List<Item>();
+            _spaceOnShelf = emptySpace;
+            _items = new List<Item>();
+            Init();
+        }
 
+        public void Init()
+        {
             Console.WriteLine("Enter item details (productName itemShelf itemType kosherType lengthItem):");
             string input = Console.ReadLine();
             string[] inputParts = input.Split(' ');
@@ -28,9 +32,9 @@ namespace Refrigerator_exercise
             if (inputParts.Length == 5 &&
                 int.TryParse(inputParts[1], out int itemShelf) && Enum.TryParse(inputParts[2], out ItemType itemType) &&
                 Enum.TryParse(inputParts[3], out KosherType kosherType) && double.TryParse(inputParts[4], out double lengthItem))
-                // DateTime.TryParse(inputParts[4], out DateTime expiryDate) &&
+            // DateTime.TryParse(inputParts[4], out DateTime expiryDate) &&
             {
-                Items.Add(new Item(inputParts[0], itemShelf, itemType, kosherType, yourDateTime, lengthItem));
+                _items.Add(new Item(inputParts[0], itemShelf, itemType, kosherType, yourDateTime, lengthItem));
                 Console.WriteLine("Item added successfully.");
             }
         }
@@ -38,25 +42,13 @@ namespace Refrigerator_exercise
         {
             string result = $"ShelfID: {_shelfID}\n" +
                    $"FloorNumber: {_floorNumber}\n" +
-                   $"EmptySpaceOnShelf: {_emptySpaceOnShelf}\n";
+                   $"EmptySpaceOnShelf: {_spaceOnShelf}\n";
 
-            foreach (Item item in Items)
+            foreach (Item item in _items)
             {
                 result += item.ToString() + "\n";
             }
             return result;
-        }
-        public Item RemoveItemFromShelf(int itemID)
-        {
-            foreach (Item item in Items)
-            {
-                if (item.ItemID == itemID)
-                {
-                    Items.Remove(item);
-                    return item;
-                }
-            }
-            return null;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Refrigerator_exercise
             string color = inputParts[1];
             if (int.TryParse(inputParts[2], out int capacity))
             {
-                Refrigerator myObject = new Refrigerator(model, color, capacity);
+                Frigde myObject = new Frigde(model, color, capacity);
                 //Item it= new Item("cola",1,ItemType.Drink,KosherType.Dairy, yourDateTime,2);
                 //myObject.AddItem(it);
                 Console.WriteLine(myObject.ToString());
