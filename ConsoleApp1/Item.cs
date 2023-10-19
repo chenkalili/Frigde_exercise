@@ -9,7 +9,6 @@ namespace Refrigerator_exercise
     public class Item
     {
         private static int lastItemID = 0;
-
         public int _itemID { get; }
         public string _productName { get; set; }
         public int _itemShelf { get; set; }
@@ -18,11 +17,10 @@ namespace Refrigerator_exercise
         public DateTime _expiryDate { get; set; }
         public double _lengthItem { get; set; }
 
-        public Item(string productName, int itemShelf, ItemType type, KosherType kosher, DateTime expiryDate, double lengthItem)
+        public Item(string productName, ItemType type, KosherType kosher, DateTime expiryDate, double lengthItem)
         {
             _itemID = ++lastItemID; ;
             _productName = productName;
-            _itemShelf = itemShelf;
             _type = type;
             _kosher = kosher;
             _expiryDate = expiryDate;
@@ -52,5 +50,4 @@ namespace Refrigerator_exercise
         _dairy,
         _pareve
     }
-
 }
