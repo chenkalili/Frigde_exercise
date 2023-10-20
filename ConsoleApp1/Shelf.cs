@@ -18,7 +18,7 @@ namespace Refrigerator_exercise
         {
             _shelfID = ++lastShelfID;
             _floorNumber = floorIndex;
-            _spaceOnShelf = emptySpace;
+            _spaceOnShelf = 15;
             _items = new List<Item>();
         }
 

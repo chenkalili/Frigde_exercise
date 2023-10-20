@@ -40,14 +40,14 @@ namespace Refrigerator_exercise
 
     public enum ItemType
     {
-        _food,
-        _drink
+        FOOD,
+        DRINK
     }
 
     public enum KosherType
     {
-        _meat,
-        _dairy,
-        _pareve
+        MEAT,
+        DARIY,
+        Parve
     }
 }
