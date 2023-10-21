@@ -14,11 +14,14 @@ namespace Refrigerator_exercise
         public double _spaceOnShelf { get; set; }
         public List<Item> _items { get; set; }
 
+
+        const double SPACE = 15;
+
         public Shelf(int floorIndex)
         {
             _shelfID = ++lastShelfID;
             _floorNumber = floorIndex;
-            _spaceOnShelf = 15;
+            _spaceOnShelf = SPACE;
             _items = new List<Item>();
         }
 
@@ -26,7 +29,7 @@ namespace Refrigerator_exercise
         {
             string result = $"ShelfID: {_shelfID}\n" +
                    $"FloorNumber: {_floorNumber}\n" +
-                   $"EmptySpaceOnShelf: {_spaceOnShelf}\n";
+                   $"EmptySpaceOnShelf: {_spaceOnShelf}\n\n";
 
             foreach (Item item in _items)
             {

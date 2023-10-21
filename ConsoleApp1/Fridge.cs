@@ -8,15 +8,19 @@ namespace Refrigerator_exercise
     public class Fridge
     {
         private static int lastFridgeID = 0;
-        public double _spaceInFridge = 0;
+        public double _spaceInFridge {  get; set; }
         public int _fridgeID { get; }
         public string _model { get; set; }
         public string _color { get; set; }
         public int _numOfShelves { get; set; }
         public List<Shelf> _shelves { get; set; }
+
+        const int SPACE= 15;
+
         public Fridge(string model, string color, int numberOfShelves)
         {
             _fridgeID = ++lastFridgeID;
+            _spaceInFridge = numberOfShelves * SPACE;
             _model = model;
             _color = color;
             _shelves = new List<Shelf>();
@@ -117,9 +121,9 @@ namespace Refrigerator_exercise
             return fridges.OrderBy(fridge => fridge._spaceInFridge).ToList();
         }
 
-        public string ReadyForShopping()
+        public void ReadyForShopping()
         {
-            double enoughSpace = 20, newSpace=0;
+            double enoughSpace = 90, newSpace=0;
             if(_spaceInFridge <= enoughSpace)
             {
                 CleanFridge();
@@ -127,20 +131,27 @@ namespace Refrigerator_exercise
                 {
                     newSpace += checkIfToRemoveItem(KosherType.DARIY, 3);
                     newSpace += checkIfToRemoveItem(KosherType.MEAT, 7);
-                    newSpace += checkIfToRemoveItem(KosherType.Parve, 1);
+                    newSpace += checkIfToRemoveItem(KosherType.PARVE, 1);
                     if((newSpace + _spaceInFridge) > enoughSpace)
                     {
                         RemoveItemByPramas(KosherType.DARIY, 3);
                         RemoveItemByPramas(KosherType.MEAT, 7);
-                        RemoveItemByPramas(KosherType.Parve, 1);
+                        RemoveItemByPramas(KosherType.PARVE, 1);
                     }
                     else
                     {
-                        return "it's not time to do a shopping";
+                        Console.WriteLine("it's not time to do a shopping\n");
                     }
                 }
+                else
+                {
+                    Console.WriteLine("You are ready for shopping\n");
+                }
             }
-            return string.Empty; 
+            else
+            {
+                Console.WriteLine("You are ready for shopping\n");
+            }
         }
 
         public void RemoveItemByPramas(KosherType food, double days )
@@ -149,7 +160,7 @@ namespace Refrigerator_exercise
             {
                 shelf._items.RemoveAll(item =>
                 {
-                    if (item._kosher == food && item._expiryDate == DateTime.Today.AddDays(-days))
+                    if (item._kosher == food && item._expiryDate < DateTime.Today.AddDays(days))
                     {
                         shelf._spaceOnShelf += item._lengthItem;
                         Console.WriteLine($"The item '{item._productName}' has been thrown away.");
@@ -213,6 +224,7 @@ namespace Refrigerator_exercise
         public void PrintCleanFridge()
         {
             List<Item> items = CleanFridge();
+            Console.WriteLine("The items removed from the refrigerator due to cleaning:");
             foreach (Item item in items)
             {
                 Console.WriteLine(item.ToString());
@@ -259,6 +271,7 @@ namespace Refrigerator_exercise
                 Console.WriteLine("Invalid input. Please enter valid Kosher Type and Item Type.");
             }
         }
+
         public Item RemoveItemByID()
         {
             Console.Write("Enter the item number you want to take out of the fridge: ");

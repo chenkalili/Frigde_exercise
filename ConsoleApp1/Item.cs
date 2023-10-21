@@ -48,6 +48,6 @@ namespace Refrigerator_exercise
     {
         MEAT,
         DARIY,
-        Parve
+        PARVE
     }
 }
