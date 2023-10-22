@@ -55,6 +55,7 @@ namespace Refrigerator_exercise
                 {
                     shelf._spaceOnShelf -= newItem._lengthItem;
                     newItem._itemShelf = shelf._floorNumber;
+                    _spaceInFridge -= newItem._lengthItem;
                     shelf._items.Add(newItem);
                     Console.WriteLine("Item added successfully.");
                     break;
@@ -255,20 +256,28 @@ namespace Refrigerator_exercise
             Console.WriteLine("Enter what you want to eat (Kosher Type, Item Type):");
             string input = Console.ReadLine();
             string[] inputParts = input.Split(' ');
-
-            if (inputParts.Length == 2 &&
-                Enum.TryParse(inputParts[0], out KosherType kosherType) &&
-                Enum.TryParse(inputParts[1], out ItemType itemType))
+            try
             {
+                if (inputParts.Length != 2)
+                {
+                    throw new FormatException("Invalid input. Please enter Kosher Type and Item Type separated by a space.");
+                }
+
+                if (!Enum.TryParse(inputParts[0], out KosherType kosherType) ||
+                    !Enum.TryParse(inputParts[1], out ItemType itemType))
+                {
+                    throw new FormatException("Invalid input. Please enter valid Kosher Type and Item Type.");
+                }
+
                 List<Item> items = whatToEat(kosherType, itemType);
                 foreach (Item item in items)
                 {
                     Console.WriteLine(item.ToString());
                 }
             }
-            else
+            catch (FormatException ex)
             {
-                Console.WriteLine("Invalid input. Please enter valid Kosher Type and Item Type.");
+                Console.WriteLine($"Error: {ex.Message}");
             }
         }
 

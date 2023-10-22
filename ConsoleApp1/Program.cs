@@ -41,35 +41,39 @@ namespace Refrigerator_exercise
                 Console.WriteLine("7. Exit");
 
                 Console.Write("Enter your choice: ");
-                int choice = int.Parse(Console.ReadLine());
-
-                switch (choice)
+                try
                 {
-                    case 1:
-                        fridgeList.MenuForOneFridge();
-                        break;
-                    case 2:
-                        fridgeList.AddFridge();
-                        break;
-                    case 3:
-                        fridgeList.RemoveFridge();
-                        break;
-                    case 4:
-                        Console.WriteLine(fridgeList.ToString());
-                        break;
-                    case 5:
-                        Console.WriteLine($"Space in fridges: {fridgeList._spaceInFridges}");
-                        break;
-                    case 6:
-                        fridgeList.SortFridgesBySpace();
-                        break;
-                    case 7:
-                        exit=true;
-                        return;
-
-                    default:
-                        Console.WriteLine("Invalid choice. Please select a valid option.");
-                        break;
+                    int choice = int.Parse(Console.ReadLine());
+                    switch (choice)
+                    {
+                        case 1:
+                            fridgeList.MenuForOneFridge();
+                            break;
+                        case 2:
+                            fridgeList.AddFridge();
+                            break;
+                        case 3:
+                            fridgeList.RemoveFridge();
+                            break;
+                        case 4:
+                            Console.WriteLine(fridgeList.ToString());
+                            break;
+                        case 5:
+                            fridgeList.SpaceInFridges();
+                            break;
+                        case 6:
+                            fridgeList.SortFridgesBySpace();
+                            break;
+                        case 7:
+                            exit = true;
+                            return;
+                        default:
+                            break;
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid integer choice.");
                 }
             }
         }

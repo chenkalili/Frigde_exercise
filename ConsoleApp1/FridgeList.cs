@@ -33,7 +33,10 @@ namespace Refrigerator_exercise
                 fridge.PrintFridge();
             }
         }
-
+        public void AddFridge(Fridge newFridge)
+        {
+            _fridges.Add(newFridge);
+        }
         public override string ToString()
         {
             string fridgesData = $"listID: {_listID}\n" + $"ListName: {_listName}\n" + $"NumOfFridge: {_numOfFridge}\n"  + $"SpaceInFridges: {_spaceInFridges}\n\n";
@@ -50,6 +53,8 @@ namespace Refrigerator_exercise
             {
                 _spaceInFridges += fridge._spaceInFridge;
             }
+
+            Console.WriteLine($"Space in fridges: {_spaceInFridges}");
         }
 
         public void RemoveFridge()
@@ -131,11 +136,6 @@ namespace Refrigerator_exercise
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
-        }
-
-        public void AddFridge(Fridge newFridge)
-        {
-            _fridges.Add(newFridge);
         }
     }
 }
